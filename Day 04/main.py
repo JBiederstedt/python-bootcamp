@@ -25,7 +25,6 @@ scissors = '''
 ---.__(___)
 '''
 
-
 import random
 
 choices = [rock, paper, scissors]
