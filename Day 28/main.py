@@ -1,5 +1,4 @@
 from tkinter import *
-import math
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -26,10 +25,10 @@ def start_timer():
     REPS += 1
 
     if REPS == 8:
-        label_timer.config(text="Long Break", fg=RED)
+        label_timer.config(text="Break", fg=RED)
         count_down(LONG_BREAK_MIN * 60)
     elif REPS % 2 == 0:
-        label_timer.config(text="Short Break", fg=PINK)
+        label_timer.config(text="Break", fg=PINK)
         count_down(SHORT_BREAK_MIN * 60)
     else:
         label_timer.config(text="Work", fg=GREEN)
@@ -39,7 +38,7 @@ def start_timer():
 def count_down(count):
     global REPS
 
-    count_min = math.floor(count / 60)
+    count_min = count // 60
     count_sec = count % 60
 
     if count_sec < 10:
@@ -50,6 +49,10 @@ def count_down(count):
     if count > 0:
         window.after(1000, count_down, count - 1)
     else:
+        if REPS % 2 == 1:  
+            checks = "✔" * ((REPS // 2) + 1)
+            label_checks.config(text=checks)
+
         if REPS == 8:
             REPS = 0
 
@@ -69,8 +72,8 @@ canvas.grid(row=1, column=1)
 label_timer = Label(text="Timer", fg=GREEN, bg=YELLOW, font=(FONT_NAME, FONT_SIZE_LABEL, FONT_STYLE_LABEL), pady=10)
 label_timer.grid(row=0, column=1)
 
-label_check = Label(text="✔", fg=GREEN, bg=YELLOW, font=(FONT_NAME, FONT_SIZE_LABEL, FONT_STYLE_LABEL))
-label_check.grid(row=3, column=1)
+label_checks = Label(fg=GREEN, bg=YELLOW, font=(FONT_NAME, FONT_SIZE_LABEL, FONT_STYLE_LABEL))
+label_checks.grid(row=3, column=1)
 
 btn_start = Button(text="Start", padx=10, pady=10, borderwidth=0, command=start_timer)
 btn_start.grid(row=2, column=0)
