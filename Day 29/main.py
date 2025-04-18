@@ -1,6 +1,7 @@
 # ---------------------------- IMPORTS ------------------------------- #
 
 from tkinter import *
+from tkinter import messagebox
 
 # ---------------------------- CONSTANTS ------------------------------- #
 
@@ -14,17 +15,36 @@ DEFAULT_EMAIL   = "placeholder@email.com"
 def add_credentials():
     global CREDENTIALS_FILE, DEFAULT_EMAIL
 
-    website = entry_website.get()
-    email = entry_email.get()
-    password = entry_password.get()
+    website = entry_website.get().strip()
+    email = entry_email.get().strip()
+    password = entry_password.get().strip()
 
-    with open(CREDENTIALS_FILE, mode="a", encoding="utf-8") as credentials_file:
-        credentials_file.write(f"Website: {website} | Email/Username: {email} | Password: {password}\n")
-    
-    entry_website.delete(0, END)
-    entry_email.delete(0, END)
-    entry_email.insert(0, DEFAULT_EMAIL)
-    entry_password.delete(0, END)
+    empty_entries = not website or not email or not password
+
+    if empty_entries:
+        message_missing_entries = "Missing Entries"
+        messagebox.showwarning(title="Empty Entries", message=message_missing_entries)
+
+        return
+
+    message_save = f"""\
+                Do you want to save these credentials?
+
+                Website: {website}
+                Email/Username: {email}
+                Password: {password}
+
+                Press OK to save."""
+    user_confirmation = messagebox.askokcancel(title=website, message=message_save)
+
+    if user_confirmation:
+        with open(CREDENTIALS_FILE, mode="a", encoding="utf-8") as credentials_file:
+            credentials_file.write(f"Website: {website} | Email/Username: {email} | Password: {password}\n")
+        
+        entry_website.delete(0, END)
+        entry_email.delete(0, END)
+        entry_email.insert(0, DEFAULT_EMAIL)
+        entry_password.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
