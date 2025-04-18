@@ -15,20 +15,45 @@ FONT_STYLE_LABEL = "normal"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
+REPS = 0
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
-    count_down(WORK_MIN * 60)
+    global REPS
+
+    REPS += 1
+
+    if REPS == 8:
+        label_timer.config(text="Long Break", fg=RED)
+        count_down(LONG_BREAK_MIN * 60)
+    elif REPS % 2 == 0:
+        label_timer.config(text="Short Break", fg=PINK)
+        count_down(SHORT_BREAK_MIN * 60)
+    else:
+        label_timer.config(text="Work", fg=GREEN)
+        count_down(WORK_MIN * 60)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 def count_down(count):
+    global REPS
+
     count_min = math.floor(count / 60)
     count_sec = count % 60
+
+    if count_sec < 10:
+        count_sec = f"0{count_sec}"
+    
     canvas.itemconfig(clock, text=f"{count_min}:{count_sec}")
+
     if count > 0:
         window.after(1000, count_down, count - 1)
+    else:
+        if REPS == 8:
+            REPS = 0
+
+        start_timer()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
