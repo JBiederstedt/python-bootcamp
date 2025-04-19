@@ -11,6 +11,34 @@ from password_generator import password_generator
 CREDENTIALS_FILE = "credentials.json"
 DEFAULT_EMAIL   = "placeholder@email.com"
 
+# ---------------------------- SEARCH CREDENTIALS ------------------------------- #
+
+def search_credentials():
+    search_site = entry_website.get().strip().title()
+
+    if not search_site:
+        message_missing_site = "Missing Website Entry"
+        messagebox.showwarning(title="Empty Search", message=message_missing_site)
+
+        return
+    
+    try:
+        with open(CREDENTIALS_FILE, mode="r") as credentials_file:
+            data = json.load(credentials_file)
+
+            message_credentials = f"""\
+                                Your credentials for {search_site} are:
+
+                                Email/Username: {data[search_site]["email/username"]}
+                                Password: {data[search_site]["password"]}"""
+            messagebox.showinfo(title="Credentials Found", message=message_credentials)
+    except FileNotFoundError:
+        message_no_file = "Credentials file not found"
+        messagebox.showinfo(title="No File", message=message_no_file)
+    except KeyError:
+        message_no_credentials = "No credentials for your search"
+        messagebox.showinfo(title="No Credentials", message=message_no_credentials)        
+
 # ---------------------------- GENERATE PASSWORD ------------------------------- #
 
 def generate_password():
@@ -26,9 +54,7 @@ def generate_password():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def add_credentials():
-    global CREDENTIALS_FILE, DEFAULT_EMAIL
-
-    website = entry_website.get().strip()
+    website = entry_website.get().strip().title()
     email = entry_email.get().strip()
     password = entry_password.get().strip()
     new_credentials = {
@@ -95,8 +121,8 @@ label_password = Label(text="Password:", pady=5)
 label_password.grid(row=3, column=0)
 
 # Entries
-entry_website = Entry(width=37)
-entry_website.grid(row=1, column=1, columnspan=2)
+entry_website = Entry(width=21)
+entry_website.grid(row=1, column=1)
 entry_website.focus()
 
 entry_email = Entry(width=37)
@@ -107,6 +133,9 @@ entry_password = Entry(width=21)
 entry_password.grid(row=3, column=1)
 
 # Buttons
+btn_search = Button(text="Search Credentials", width=12, command=search_credentials)
+btn_search.grid(row=1, column=2)
+
 btn_generate_password = Button(text="Generate Password", width=12, command=generate_password)
 btn_generate_password.grid(row=3, column=2)
 
