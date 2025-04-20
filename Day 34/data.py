@@ -1,102 +1,38 @@
-question_data = [
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "medium",
-        "question": "The HTML5 standard was published in 2014.",
-        "correct_answer": "True",
-        "incorrect_answers": [
-            "False"
+# ---------------------------- IMPORTS ------------------------------- #
+
+import requests
+import html
+
+# ---------------------------- CONSTANTS ------------------------------- #
+
+NUMBER_OF_QUESTIONS = 10
+DIFFICULTY_LEVEL_EASY = "easy"
+DIFFICULTY_LEVEL_MEDIUM = "medium"
+DIFFICULTY_LEVEL_HARD = "hard"
+API_QUIZ = f"https://opentdb.com/api.php?amount={NUMBER_OF_QUESTIONS}&difficulty={DIFFICULTY_LEVEL_MEDIUM}&type=boolean"
+
+# ---------------------------- GET QUESTION DATA ------------------------------- #
+
+def get_questions():
+    try:
+        response = requests.get(API_QUIZ)
+        response.raise_for_status()
+
+        data = response.json()
+        if not data["results"]:
+            print("No questions returned from API.")
+            return []
+
+        question_data = [
+            {
+                "question": html.unescape(result["question"]), # get rid of html entities
+                "correct_answer": result["correct_answer"],
+            }
+            for result in data["results"]
         ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "medium",
-        "question": "The first computer bug was formed by faulty wires.",
-        "correct_answer": "False",
-        "incorrect_answers": [
-            "True"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "medium",
-        "question": "FLAC stands for 'Free Lossless Audio Condenser'.",
-        "correct_answer": "False",
-        "incorrect_answers": [
-            "True"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "medium",
-        "question": "All program codes have to be compiled into an executable file in order to be run. This file can then be executed on any machine.",
-        "correct_answer": "False",
-        "incorrect_answers": [
-            "True"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "easy",
-        "question": "Linus Torvalds created Linux and Git.",
-        "correct_answer": "True",
-        "incorrect_answers": [
-            "False"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "easy",
-        "question": "The programming language 'Python' is based off a modified version of 'JavaScript'",
-        "correct_answer": "False",
-        "incorrect_answers": [
-            "True"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "medium",
-        "question": "AMD created the first consumer 64-bit processor.",
-        "correct_answer": "True",
-        "incorrect_answers": [
-            "False"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "easy",
-        "question": "'HTML' stands for Hypertext Markup Language.",
-        "correct_answer": "True",
-        "incorrect_answers": [
-            "False"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "easy",
-        "question": "In most programming languages, the operator ++ is equivalent to the statement '+= 1'.",
-        "correct_answer": "True",
-        "incorrect_answers": [
-            "False"
-        ]
-    },
-    {
-        "category": "Science: Computers",
-        "type": "boolean",
-        "difficulty": "hard",
-        "question": "The IBM PC used an Intel 8008 microprocessor clocked at 4.77 MHz and 8 kilobytes of memory.",
-        "correct_answer": "False",
-        "incorrect_answers": [
-            "True"
-        ]
-    }
-]
+
+        return question_data
+
+    except Exception as e:
+        print(f"Something went wrong:\n{e}")
+        return []
