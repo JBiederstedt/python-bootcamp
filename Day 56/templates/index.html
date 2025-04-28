@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ name }} – {{ title }}</title>
+
+    <!-- Compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/noscript.css') }}"
+      />
+    </noscript>
+  </head>
+  <body class="is-loading">
+    <div id="wrapper">
+      <!-- Main Section -->
+      <section id="main">
+        <header>
+          <span class="avatar">
+            <img
+              src="{{ url_for('static', filename='images/avatar.jpg') }}"
+              alt="Avatar"
+            />
+          </span>
+          <h1>{{ name }}</h1>
+          <p>{{ title }}</p>
+        </header>
+
+        <p class="major">{{ headline }}</p>
+
+        <!-- About Section -->
+        <section id="about">
+          <p>{{ about }}</p>
+        </section>
+
+        <!-- Footer / Contact & Social -->
+        <footer>
+          <!-- Social Icons -->
+          <ul class="icons">
+            {% if social_links.github %}
+            <li>
+              <a href="{{ social_links.github }}" class="icon brands fa-github">
+                <span class="label">GitHub</span>
+              </a>
+            </li>
+            {% endif %} {% if social_links.linkedin %}
+            <li>
+              <a
+                href="{{ social_links.linkedin }}"
+                class="icon brands fa-linkedin"
+              >
+                <span class="label">LinkedIn</span>
+              </a>
+            </li>
+            {% endif %} {% if social_links.twitter %}
+            <li>
+              <a
+                href="{{ social_links.twitter }}"
+                class="icon brands fa-twitter"
+              >
+                <span class="label">Twitter</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+
+          <div class="address icon solid fa-home">{{ address }}</div>
+        </footer>
+      </section>
+
+      <!-- Site Footer -->
+      <footer id="footer">
+        <ul class="copyright">
+          <li>&copy; {{ name }}</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      if ('addEventListener' in window) {
+        window.addEventListener('load', function () {
+          document.body.className = document.body.className.replace(
+            /\bis-loading\b/,
+            ''
+          );
+        });
+        document.body.className += navigator.userAgent.match(/(MSIE|rv:11\.0)/)
+          ? ' is-ie'
+          : '';
+      }
+    </script>
+  </body>
+</html>
