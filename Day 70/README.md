@@ -1,85 +1,144 @@
-# Day 70: Git, Github, and Version Control
+# 🚀 Day 70: Git, GitHub, and Version Control
 
-## Overview
+## 🧽 Overview
 
-- Topics: Summary of Git, Github, and Version Control
-- Git Commands, Creating a Remote Repository, Creating Files (.gitignore), Branching, Merging, Cloning, Forking, Pull vs Push Requests
+A concise guide to using Git and GitHub for version control, collaboration, and repository management.
 
-### Links
+---
 
-- Solution URL: [Git, Github, and Version Control](https://github.com/Mikerniker/100_Days_of_Python/tree/main/Day70)
-- No exercise except for the Project folder to practice some of the commands.
+## 🪰 Topics Covered
 
-### References
+- Common Git commands
+- Creating and connecting to remote repositories
+- Using `.gitignore` effectively
+- Branching and merging strategies
+- Cloning vs forking
+- Understanding pull and push requests
 
-- [Github GitIgnore](github.com/gitHub/gitignore) a repository owned by the GitHub team for Git Ignore, which is a pre-made collection of useful git ignore templates.
-- [Beginner Friendly Repos](https://github.com/MunGell/awesome-for-beginners)
-- [Wordle Game Repo](https://github.com/ritik48/Wordle-Game)
-- [Git Exercises](https://learngitbranching.js.org/) Complete the challenges here to dive deeper into Git, including learning about Cherry-Picking, Git Rebase, and more.
+---
 
-### Notes
+## 🛠️ Git Commands
 
-Git Commands (Windows)
+```bash
+git status               # Show current changes and branch info
+git init                 # Initialize a Git repository
+git add .                # Stage all changes
+git commit -m "message"  # Commit changes with a message
+git push                 # Push to the default remote
+git push origin main -u  # Push to remote and set upstream
+git rm --cached -r .     # Unstage files (undo `git add`)
+git log                  # Show commit history
+clear                    # Clear terminal screen
+```
 
-- `git status`
-- `git init`
-- `git add .`
-- `git commit -m`
-- `git push` Pushes to github
-- `git push origin main -u` Pushes to github
-- `git rm --cached -r .` Use this to remove files from my staging area / undo the last step.
-- `git log` This lets you see what commits you have made
-- `clear` (to clear terminal)
-- To exit the “git log” operation, press the “q” key
+> To exit `git log`, press `q`.
 
-Create Remote Repository
+---
 
-- `git remote add <name> <url>`
-- `git push -u <remote name>  <branch name>` Pushes local repository to the remote repository.
+## 🌐 Creating a Remote Repository
 
-To Create a file:
+```bash
+git remote add <name> <url>         # Connect local repo to GitHub
+git push -u <remote-name> <branch>  # Push initial commit and set upstream
+```
 
-- `touch name-of-file.filetype`
+---
 
-To Create a GitIgnore File:
+## 📄 Creating Files and .gitignore
 
-- `touch .gitignore`
-- `code .gitignore` (Open GitIgnore for Windows)
+```bash
+touch <filename>         # Create a new file
+touch .gitignore         # Create a .gitignore file
+code .gitignore          # Open .gitignore in VSCode (optional)
+```
 
-To Clone a repository
+### Example `.gitignore`:
 
-- `git clone url`
+```
+# Node modules
+node_modules/
 
-To Create a BRANCH
+# Logs
+*.log
 
-- git branch name-of-branch
-- git branch (Use this to see which branch you are on)
+# OS-generated files
+.DS_Store
+Thumbs.db
 
-TO MERGE the branches
+# Environment files
+.env
+```
 
-- git merge name-of-branch
-- Steps:
+---
 
-1. Go back to the main branch
-   git checkout main
-2. Merge
-   git merge name-of-branch
-   Note: if VIM comes out, type `:q!` (to save and quit)
+## 🌿 Branching and Merging
 
-To SWITCH to BRANCH
+### Create a Branch
 
-- git checkout name-of-branch
+```bash
+git branch <branch-name>  # Create a new branch
+git branch                # List all branches (current is highlighted)
+```
 
-GIT CLONE vs FORKING
+### Switch to a Branch
 
-- Git clone is grabbing at the entirety of the repository and then cloning it to your local work environment. Git clone is useful with a trusted team that has read and write permissions, they can work on it locally/ push it and resolve conflicts
-- Forking is copying / duplicating a remote repository that's hosted on GitHub and keeping the copy under your own GitHub account where you can make changes to it. Once you've forked a remote repository, then you can do whatever you want to it.
-- Forking allows an external user to do what they want: add features / improve code base, add more code etc.
+```bash
+git checkout <branch-name>  # Switch to the desired branch
+```
 
-PULL REQUESTS
+### Merge a Branch
 
-- If external user wants the original creator of the repo to incorporate any changes they made, then make a pull request. Original owner decides whether or not to incorporate aka "merge" those requests.
+```bash
+git checkout main           # Switch to main branch
+git merge <branch-name>     # Merge changes from other branch into main
+```
 
-vs PUSH REQUESTS
+> If VIM opens, type `:q!` to exit the message editor.
 
-- You can do this with your own repository or your own copy of a repository
+---
+
+## 🔁 Cloning vs Forking
+
+### Git Clone
+
+- Duplicates the entire repository locally.
+- Ideal for internal collaboration with team members who have push access.
+
+```bash
+git clone <url>
+```
+
+### Git Fork
+
+- Makes a personal copy of a remote repository on GitHub.
+- Useful for open source or contributing without write access.
+- You can make changes independently and submit them via a Pull Request.
+
+---
+
+## 🔄 Pull vs Push Requests
+
+### Pull Request (PR)
+
+- A GitHub feature for proposing changes from one repo/branch to another.
+- Used to suggest improvements, bug fixes, or features.
+- Reviewed and merged by the repository owner.
+
+### Push "Request"
+
+> ⚠️ Not an official Git/GitHub term.
+
+- Refers informally to pushing changes to your own or shared remote.
+- No approval is needed if you have write access.
+
+---
+
+## ✅ Quick Reference Checklist
+
+- ***
+
+## 📚 Further Reading
+
+- [Git Documentation](https://git-scm.com/doc)
+- [GitHub Docs](https://docs.github.com/en)
+- Markdown Cheatsheet
