@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to my Portfolio</h1>
+    </header>
+
+    <section id="gallery">
+      {% for img in images %}
+      <div class="card">
+        <img src="{{ img }}" alt="Portfolio Image" />
+      </div>
+      {% endfor %}
+    </section>
+
+    <section id="about">
+      <h2>About me</h2>
+      <p>Some things about me.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <form>
+        <input type="text" placeholder="Name" required />
+        <input type="email" placeholder="Email" required />
+        <textarea placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
