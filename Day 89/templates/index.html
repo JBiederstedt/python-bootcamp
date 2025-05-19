@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<form action="{{ url_for('index') }}" method="POST" class="task-form">
+  <input type="text" name="title" placeholder="Enter a new task" required />
+  <button type="submit">Add Task</button>
+</form>
+
+<ul class="task-list">
+  {% for task in tasks %}
+  <li class="task-item {% if task.completed %}completed{% endif %}">
+    <a href="{{ url_for('complete', task_id=task.id) }}" class="toggle"
+      >&#10003;</a
+    >
+    <span>{{ task.title }}</span>
+    <a href="{{ url_for('delete', task_id=task.id) }}" class="delete"
+      >&times;</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
