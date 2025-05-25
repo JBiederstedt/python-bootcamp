@@ -157,7 +157,7 @@ screen.onkeypress(move_left, "Left")
 screen.onkeypress(move_right, "Right")
 screen.onkeypress(fire_bullet, "space")
 
-# Start game loops
+# Start game loop
 move_enemies()
 move_bullet()
 screen.mainloop()
