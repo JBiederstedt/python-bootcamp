@@ -1,0 +1,16 @@
+{% extends 'layout.html' %} {% block content %}
+<h1>Products</h1>
+<div class="products">
+  {% for p in products %}
+  <div class="product">
+    <h3>{{ p.name }}</h3>
+    <p>${{ '%.2f' % (p.price_cents/100) }}</p>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('add_to_cart', product_id=p.id) }}">Add to Cart</a>
+    {% else %}
+    <a href="{{ url_for('login') }}">Login to buy</a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
