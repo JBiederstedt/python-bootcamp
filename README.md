@@ -95,8 +95,6 @@ Throughout the 100 days, I worked on the following types of projects:
 
 - **Python 3.8 or newer**
 - Optional but recommended: Virtual environment (venv or conda)
-- Basic familiarity with the command line / terminal
-- Git and GitHub account (for version control)
 
 ---
 
