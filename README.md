@@ -1,4 +1,4 @@
-# Python Bootcamp (100 Days of Code)
+# Python Projects (100 Days of Code)
 
 This repository contains my personal solutions, exercises, and projects completed during the **100 Days of Code: The Complete Python Pro Bootcamp** by Dr. Angela Yu on Udemy. Over the span of 100 days, I followed along with each video lesson, practiced the concepts, and built the associated mini-projects and challenges.
 
@@ -20,8 +20,8 @@ I enrolled in this course to strengthen my Python fundamentals and apply them to
 1. **Clone or Download**
 
    ```bash
-   git clone https://github.com/jbiederstedt/python-bootcamp.git
-   cd python-bootcamp
+   git clone https://github.com/jbiederstedt/python-100days-projects.git
+   cd python-100days-projects
    ```
 
 2. **Browse Day Folders**
